@@ -12,31 +12,37 @@ class ProductManager {
             stock
         }
 
-        if(this.products.length === 0) {
+        if (this.products.length === 0) {
             nuevoProducto.id = 1
         } else {
             nuevoProducto.id = this.products[this.products.length - 1].id + 1;
         }
-        
+
         this.products.push(nuevoProducto)
     }
 
-    getProducts(){
+    getProducts() {
         return this.products
     }
 
-    getProductsById(id) {
-        let idFiltrados = this.products.filter(product => product.id === id);
-        return idFiltrados
+    getProductosById(idProducto) {
+        let indiceProducto = this.products.findIndex(prod => prod.id === idProducto)
+
+        if (indiceProducto === -1) {
+            console.log(`El producto ${idProducto} no existe`)
+            return
+        } else {
+            return this.products[idProducto]
+        }
     }
 }
 
 let persona = new ProductManager()
 persona.addProduct("producto prueba", "este es un producto prueba", 200, "sin imagen", 25)
 persona.addProduct("hola", "no", 20, "foto", 90)
+persona.getProductosById(15)
 
 console.log(persona.getProducts())
 
-const productWithId1 = persona.getProductsById(1);
-console.log(productWithId1);
+
 
